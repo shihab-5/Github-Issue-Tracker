@@ -5,13 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon">
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body>
+<body class=" bg-base-200 min-h-screen">
     <header>
-<p>hello there</p>
+<div class="navbar bg-base-100 shadow-sm px-20">
+  <div class="flex-1 ">
+    <div class="flex gap-2">
+        <img src="./assets/github-logo.png" class="w-[3%]">
+        <p class="font-bold text-2xl">GitHub Issues Tracker</p>
+    </div>
+        
+  </div>
+  <div class="flex gap-2">
+    <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
+   <button class="btn btn-primary text-white">
+search
+   </button>
+  </div>
+</div>
     </header>
-    <main>
+    <main class="w-[80%] mx-auto">
+<div class="bg-base-100 p-5 rounded-2xl my-6 shadow">
+    <button class="btn btn-primary">all</button>
+    <button class="btn">open</button>
+    <button class="btn ">closed</button>
 
+</div>
+<div class="bg-base-100 p-5 rounded-t-2xl mt-3 shadow flex justify-between ">
+    <div class="flex gap-3 items-center">
+           <img src="./assets/Aperture.png" class="p-0.5 bg-gray-200 rounded-full w-10 h-10" alt="">
+   <div class="flex flex-col">
+   <p class="font-bold text-2xl">50 Issues</p>
+   <p class="font-bold text-gray-500">Track and manage your project issues</p>
+   </div>
+    </div>
+ 
+   <div class="flex gap-3 items-center ">
+    <div class="w-2 h-2 bg-green-700 mt-1.5 rounded-full"></div>
+    <p class="font-bold">open</p>
+        <div class="w-2 h-2 bg-fuchsia-700 mt-1.5 rounded-full"></div>
+
+    <p class="font-bold">closed</p>
+   </div>
+</div>
+<section>
+    <div class="grid grid-cols-4 gap-1 p-2">
+        <div>
+            
+        </div>
+
+    </div>
+</section>
     </main>
     <footer>
 
