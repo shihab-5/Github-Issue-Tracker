@@ -1,5 +1,25 @@
 const total=document.getElementById('total')
 console.log(total.innerText);
+
+// button
+const all=document.getElementById('allbtn')
+const opn=document.getElementById('openbtn')
+const clse=document.getElementById('closebtn')
+
+const loadDetail=(id)=>{
+ fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
+ .then((res)=> res.json())
+ .then((data)=> displayD(data.data))
+}
+
+const displayD=(data)=>{
+        const detail=document.getElementById("details")
+        detail.innerHTML=`hello`
+
+    document.getElementById('my_modal_5').showModal();
+
+}
+
 const showAll=()=>{
     fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     .then((res)=> res.json())
@@ -21,10 +41,12 @@ const showAll=()=>{
 const displayAll=(data)=>{
     const allCont=document.getElementById("container")
     allCont.innerHTML=``
+        total.innerText=data.length;
+
     data.forEach(l => {
         const div=document.createElement("div")
         div.innerHTML=`
-            <div id="cart${l.id}" class="min-h-full p-2 bg-base-100 flex flex-col gap-4 mt-5 shadow rounded-[10px] border-t-5 border-t-green-700">
+            <div onclick="loadDetail(${l.id})" id="cart${l.id}" class="min-h-full p-2 bg-base-100 flex flex-col gap-4 mt-5 shadow rounded-[10px] border-t-5 border-t-green-700">
             <div class="flex justify-between">
            <img src="./assets/Open-Status.png" alt="">
            <p class="px-5 bg-red-200 text-red-700 font-bold rounded-2xl">${l.priority}</p>
@@ -58,6 +80,12 @@ showAll()
 document.getElementById("openbtn").
 addEventListener("click",function(){
 
+  all.classList.remove("btn-primary")
+  opn.classList.remove("btn-primary")
+  clse.classList.remove("btn-primary")
+  all.classList.add("btn-soft")
+  opn.classList.add("btn-primary")
+         
      fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     .then((res)=> res.json())
     .then((data)=> displayOpen(data.data))
@@ -68,6 +96,7 @@ const displayOpen=(data)=>{
     const allCont=document.getElementById("container")
     allCont.innerHTML=``
     let count=0;
+   
     data.forEach(l => {
         if(l.status!="open"){
             return;
@@ -110,6 +139,13 @@ const displayOpen=(data)=>{
 }
 document.getElementById("closebtn").
 addEventListener("click",function(){
+
+      all.classList.remove("btn-primary")
+  opn.classList.remove("btn-primary")
+  clse.classList.remove("btn-primary")
+//   all.classList.add("btn-soft")
+//   opn.classList.add("btn-soft")
+  clse.classList.add("btn-primary")
 
      fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     .then((res)=> res.json())
@@ -164,7 +200,14 @@ const displayClose=(data)=>{
 
 document.getElementById("allbtn").
 addEventListener('click',function(){
-    total.innerText=50;
+
+    opn.classList.remove("btn-primary")
+  clse.classList.remove("btn-primary")
+  opn.classList.remove("btn-primary")
+//   clse.classList.add("btn-soft")
+//   opn.classList.add("btn-soft")
+  all.classList.add("btn-primary")
+
     showAll();
 
 })
