@@ -6,21 +6,66 @@ const all=document.getElementById('allbtn')
 const opn=document.getElementById('openbtn')
 const clse=document.getElementById('closebtn')
 
+const spinner=(status)=>{
+    if(status==true){
+        document.getElementById("spinner").classList.remove("hidden")
+        document.getElementById("container").classList.add("hidden")
+    }
+    else{
+        document.getElementById("spinner").classList.add("hidden")
+        document.getElementById("container").classList.remove("hidden")
+    }
+}
 const loadDetail=(id)=>{
  fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
  .then((res)=> res.json())
  .then((data)=> displayD(data.data))
 }
 
+// "status": "success",
+// "message": "Issue fetched successfully",
+// "data": {
+// "id": 1,
+// "title": "Fix navigation menu on mobile devices",
+// "description": "The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.",
+// "status": "open",
+// "labels": [
+// "bug",
+// "help wanted"
+// ],
+// "priority": "high",
+// "author": "john_doe",
+// "assignee": "jane_smith",
+// "createdAt": "2024-01-15T10:30:00Z",
+// "updatedAt": "2024-01-15T10:30:00Z"
+// }
 const displayD=(data)=>{
         const detail=document.getElementById("details")
-        detail.innerHTML=`hello`
+        detail.innerHTML=` 
+           <p class="font-bold text-2xl">${data.title}</p>
+       <div class="flex gap-1 justify-center items-center flex-wrap">
+        <p class="btn bg-green-600 text-white rounded-2xl ">${data.status}ed</p>
+        <p>. opened by ${data.author} .</p>
+        <p>${data.createdAt}</p>
+       </div>
+       <div class="flex gap-2">
+        <p class="btn btn-outline btn-error rounded-4xl">${data.labels[0]}</p>
+        <p class="btn btn-outline btn-warning rounded-4xl"> ${data.labels[1] ?data.labels[1]:``}</p>
+       </div>
+       <p>${data.description}</p>
+       <div class="flex bg-gray-200 rounded-2xl p-3 gap-44">
+        <p>assignee: <br><span class="font-extrabold">${data.assignee}</span></p>
+        <p>priority: <br><span class="btn bg-red-600 text-white rounded-3xl">${data.priority}</span></p>
+
+       </div>`
 
     document.getElementById('my_modal_5').showModal();
 
 }
 
 const showAll=()=>{
+spinner(true);
+
     fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     .then((res)=> res.json())
     .then((data)=> displayAll(data.data))
@@ -73,7 +118,7 @@ const displayAll=(data)=>{
 
         }
     });
-
+spinner(false)
 }
 showAll()
 
@@ -86,6 +131,8 @@ addEventListener("click",function(){
   all.classList.add("btn-soft")
   opn.classList.add("btn-primary")
          
+  spinner(true);
+
      fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     .then((res)=> res.json())
     .then((data)=> displayOpen(data.data))
@@ -135,7 +182,7 @@ const displayOpen=(data)=>{
     total.innerText=count;
 
     });
-
+spinner(false)
 }
 document.getElementById("closebtn").
 addEventListener("click",function(){
@@ -146,6 +193,9 @@ addEventListener("click",function(){
 //   all.classList.add("btn-soft")
 //   opn.classList.add("btn-soft")
   clse.classList.add("btn-primary")
+
+  spinner(true);
+
 
      fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     .then((res)=> res.json())
@@ -195,6 +245,7 @@ const displayClose=(data)=>{
         }
          total.innerText=count;
     });
+spinner(false)
 
 }
 
