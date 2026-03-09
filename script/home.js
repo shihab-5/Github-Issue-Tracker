@@ -265,9 +265,10 @@ addEventListener('click',function(){
 document.getElementById('searchbtn').
 addEventListener('click',function(){
 
-    const input=document.getElementById('inpt')
+    const input=document.getElementById('inpt').value.trim().toLowerCase()
 //   console.log(input.value.trim().toLowerCase())
-    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${input.value.trim().toLowerCase()}`)
+spinner(true)
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${input}`)
     .then((res)=>(res.json()))
     .then((data)=>displayAll(data.data))
 })
