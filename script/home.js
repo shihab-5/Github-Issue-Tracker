@@ -128,7 +128,6 @@ addEventListener("click",function(){
   all.classList.remove("btn-primary")
   opn.classList.remove("btn-primary")
   clse.classList.remove("btn-primary")
-  all.classList.add("btn-soft")
   opn.classList.add("btn-primary")
          
   spinner(true);
@@ -261,4 +260,14 @@ addEventListener('click',function(){
 
     showAll();
 
+})
+
+document.getElementById('searchbtn').
+addEventListener('click',function(){
+
+    const input=document.getElementById('inpt')
+//   console.log(input.value.trim().toLowerCase())
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${input.value.trim().toLowerCase()}`)
+    .then((res)=>(res.json()))
+    .then((data)=>displayAll(data.data))
 })
